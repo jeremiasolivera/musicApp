@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es" class="bg-gradient-to-r from-[#131413] via-stone-950  to-black  relative">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap"
+        rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body style="font-family: 'Nunito Sans', sans-serif;">
+
+
+
+
+    {% block content %}
+    <!-- Contenido principal -->
+    {% endblock %}
+
+    {%block js%}
+    {%endblock%}
+</body>
+
+</html>

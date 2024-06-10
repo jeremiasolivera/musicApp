@@ -1,0 +1,11 @@
+{% for user in data_users_dict %}
+    <h1>{{user.get('name')}}</h1>  <!--Tomar el registro que necesitamos-->
+    <h4>{{user.get('email')}}</h4>
+    <h4>{{user.get('surname')}}</h4>
+    {% if user.get('rol') == 0 %}
+    <h4>Músico</h4>
+    {% else %}
+    <h4>Cantante</h4>
+    {% endif %}
+    <img src="{{ url_for('static', filename='user_photo/' + user.get('photo_url')) }}" alt="{{ user.get('name') }}">
+{% endfor %}

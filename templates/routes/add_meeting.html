@@ -1,0 +1,464 @@
+{% extends 'index.html' %}
+
+{% block title %}
+Meetings - MusicApp
+{% endblock %}
+
+{% block content %}
+
+
+
+<section class="flex justify-center items-center h-screen ">
+    <div class="w-full max-w-sm sm:max-w-md md:max-w-2xl bg-[#1f1d1d] rounded-lg shadow-lg p-5 overflow-hidden">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-2xl  p-0 font-bold text-emerald-500 mb-0">Añadir reunión</h2>
+            <a href="{{url_for('meeting')}}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+              </svg>
+              </a>
+              
+        </div>
+        <form method="POST" action="{{url_for('add_meeting')}}" class="space-y-4" id="formSongs">
+            <!-- Alabanzas -->
+            <div>
+                <label for="praise" class="block text-sm font-medium text-stone-400" id="praiseText">Alabanzas:</label>
+                <div class="flex  items-center gap-2 mt-2">
+                    <input type="text" id="praiseInput" placeholder="Praise..."
+                        class="placeholder-gray-200 flex-grow px-3 py-2 border rounded-md focus:outline-none  focus:ring-2 focus:ring-bg-emerald-500 w-1/2">
+
+                    <div class="mt-1">
+                        <select id="tono" required class="block w-full p-2 rounded-md focus:ring focus:ring-emerald-300">
+                            <option selected value="S/T">S/T</option>
+                            <option value="Do+">Do+</option>
+                            <option value="Do-">Do-</option>
+                            <option value="Do#+">Do#+</option>
+                            <option value="Do#-">Do#-</option>
+                            <option value="Re+">Re+</option>
+                            <option value="Re-">Re-</option>
+                            <option value="Re#+">Re#+</option>
+                            <option value="Re#-">Re#-</option>
+                            <option value="Mi+">Mi+</option>
+                            <option value="Mi-">Mi-</option>
+                            <option value="Fa+">Fa+</option>
+                            <option value="Fa-">Fa-</option>
+                            <option value="Fa#+">Fa#+</option>
+                            <option value="Fa#-">Fa#-</option>
+                            <option value="Sol+">Sol+</option>
+                            <option value="Sol-">Sol-</option>
+                            <option value="Sol#+">Sol#+</option>
+                            <option value="Sol#-">Sol#-</option>
+                            <option value="La+">La+</option>
+                            <option value="La-">La-</option>
+                            <option value="La#+">La#+</option>
+                            <option value="La#-">La#-</option>
+                            <option value="Si+">Si+</option>
+                            <option value="Si-">Si-</option>
+                        </select>
+                    </div>
+
+                    <button type="button" class="px-3 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-700"
+                        onclick="addPraise()">+</button>
+                </div>
+                <div id="praise-container" class="mt-2 max-h-28 overflow-y-auto"></div>
+            </div>
+
+            <!-- Adoraciones -->
+            <div>
+                <label for="worship" class="block text-sm font-medium text-stone-400" id="worshipText">Adoraciones:</label>
+                <div class="flex items-center gap-2 mt-2">
+                    <input type="text" id="worshipInput" placeholder="Worship..."
+                        class="placeholder-gray-200 flex-grow px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-emerald-500 w-1/2">
+                    <div class="mt-1">
+                        <select id="tonoW" required class="block w-full p-2 rounded-md focus:ring focus:ring-emerald-300">
+                            <option selected value="S/T">S/T</option>
+                            <option value="Do+">Do+</option>
+                            <option value="Do-">Do-</option>
+                            <option value="Do#+">Do#+</option>
+                            <option value="Do#-">Do#-</option>
+                            <option value="Re+">Re+</option>
+                            <option value="Re-">Re-</option>
+                            <option value="Re#+">Re#+</option>
+                            <option value="Re#-">Re#-</option>
+                            <option value="Mi+">Mi+</option>
+                            <option value="Mi-">Mi-</option>
+                            <option value="Fa+">Fa+</option>
+                            <option value="Fa-">Fa-</option>
+                            <option value="Fa#+">Fa#+</option>
+                            <option value="Fa#-">Fa#-</option>
+                            <option value="Sol+">Sol+</option>
+                            <option value="Sol-">Sol-</option>
+                            <option value="Sol#+">Sol#+</option>
+                            <option value="Sol#-">Sol#-</option>
+                            <option value="La+">La+</option>
+                            <option value="La-">La-</option>
+                            <option value="La#+">La#+</option>
+                            <option value="La#-">La#-</option>
+                            <option value="Si+">Si+</option>
+                            <option value="Si-">Si-</option>
+                        </select>
+                    </div>
+                    <button type="button" class="px-3 py-2 bg-emerald-500 text-white rounded-md hover:bg-emerald-700"
+                        onclick="addWorship()">+</button>
+                </div>
+                <div id="worship-container" class="mt-2 max-h-28 overflow-y-auto"></div>
+            </div>
+
+            <label for="date" id="dateText" class="block text-sm font-medium text-stone-400">Fecha:</label>
+            <div class="flex items-center gap-3">
+                <div class="flex justify-center items-center gap-1"><span
+                        class="block text-sm max-[400px]:text-base font-medium text-stone-500">Sábado</span><input
+                        type="radio" name="date" class="block" id="saturdayRadio" value="sabado"></div>
+
+                <div class="flex justify-center items-center gap-1"><span
+                        class="block text-sm max-[400px]:text-base font-medium text-stone-500">Miércoles</span><input
+                        type="radio" name="date" class="block" id="wendnesdayRadio" value="miercoles"></div>
+
+                <div class="flex justify-center items-center gap-1"><span
+                        class="block text-sm max-[400px]:text-base font-medium text-stone-500 ">Fecha</span><input
+                        type="date" name="date"
+                        class="block w-32 max-[400px]:w-24 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-md text-neutral-600 bg-stone-100 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                        id="dateInput"></div>
+            </div>
+
+            <div class="">
+                <label for="hour" id="hourText" class="block text-sm font-medium text-stone-400">Horario:</label>
+                <input type="time" name="hour"
+                    class="block w-28 text-base placeholder-gray-300 transition duration-500 ease-in-out p-1 transform border border-transparent rounded-md text-neutral-600 bg-stone-100 mt-2 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                    id="hour">
+            </div>
+
+
+
+            <div class="space-y-1">
+                <label for="description"
+                    class="block  max-[400px]:text-base text-sm font-medium text-stone-400">Descripción: </label>
+                <div class="mt-1">
+                    <textarea id="description" name="description" rows="3" maxlength="120"
+                        placeholder="Reunámonos y adoremos..."
+                        class="resize-none min-[320px]:px-3 min-[320px]:py-2 block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-stone-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" ></textarea>
+                </div>
+            </div>
+
+            <!-- Botón de enviar -->
+            <div class="mt-4">
+                <input type="submit" value="Agregar reunión"
+                    class="font-bold w-full px-4 py-2 bg-emerald-500  text-white rounded-md hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            </div>
+        </form>
+    </div>
+</section>
+
+
+
+<!-- <div class="flex items-center gap-3">
+                                <div class="flex justify-center items-center gap-1"><span
+                                        class="block text-sm max-[400px]:text-base font-medium text-neutral-600">Sábado</span><input
+                                        type="radio" name="date" class="block" id="saturdayRadio" value="sabado"></div>
+
+                                <div class="flex justify-center items-center gap-1"><span
+                                        class="block text-sm max-[400px]:text-base font-medium text-neutral-600"
+                                        >Miércoles</span><input type="radio" name="date"
+                                        class="block" id="wendnesdayRadio" value="miercoles"></div>
+
+                                <div class="flex justify-center items-center gap-1"><span
+                                        class="block text-sm max-[400px]:text-base font-medium text-neutral-600">Fecha</span><input
+                                        type="date" name="date"
+                                        class="block w-28 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-md text-neutral-600 bg-stone-100 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300"
+                                        id="dateInput"></div>
+                            </div>
+ -->
+
+{% endblock %}
+
+
+
+{%block js%}
+
+<script>
+
+    let formulario = document.getElementById('formSongs')
+    let praiseFields = document.getElementsByName('praise[]');
+    let worshipFields = document.getElementsByName('worship[]');
+    let worshipInput = document.getElementById('worshipInput')
+    let praiseInput = document.getElementById('praiseInput')
+    let tonoInput = document.getElementById('tono')
+    let tonoWInput = document.getElementById('tonoW')
+
+
+
+
+    // Agregar un manejador de evento al formulario
+    formulario.addEventListener('submit', function (e) {
+        // Obtener todos los campos de entrada con el nombre 'praise[]' y 'worship[]'
+        let praiseFields = document.getElementsByName('praise[]');
+        let worshipFields = document.getElementsByName('worship[]');
+
+        // Variables para comprobar si todos los campos están llenos
+        let allPraiseFieldsFilled = true;
+        let allWorshipFieldsFilled = true;
+
+        // Comprobar los campos de 'praise[]'
+        for (let i = 0; i < praiseFields.length; i++) {
+            if (praiseFields[i].value.trim().length < 6) {
+                allPraiseFieldsFilled = false;
+                break;
+            }
+        }
+
+        // Comprobar los campos de 'worship[]'
+        for (let i = 0; i < worshipFields.length; i++) {
+            if (worshipFields[i].value.trim().length < 6) {
+                allWorshipFieldsFilled = false;
+                break;
+            }
+        }
+
+        // Si cualquiera de los campos está vacío, evitar el envío del formulario
+        is_valid = validateForm(e)
+        if (is_valid == false) {
+            e.preventDefault(); // Evita el envío del formulario
+
+        }
+
+        if (!allPraiseFieldsFilled || !allWorshipFieldsFilled) {
+            e.preventDefault(); // Evita el envío del formulario
+            alert("Completa las canciones, no las dejes vacías");
+        }
+    });
+
+
+
+    function addPraise() {
+        const container = document.getElementById('praise-container');
+        container.classList.remove('hidden');
+        container.classList.add('block');
+
+        // Crear un contenedor para el input y el botón
+        const tagContainer = document.createElement('div');
+        tagContainer.classList.add('flex', 'items-center', 'bg-emerald-900', 'rounded-md', 'shadow-md', 'my-5', 'px-3', 'py-1');
+
+        // Crear el input
+        const input = document.createElement('input');
+        input.classList.add('block', 'w-full', 'px-2', 'py-1', 'text-base', 'bg-emerald-900', 'text-neutral-300', 'rounded-md', 'focus:outline-dashed', 'focus:border-1', 'focus:border-white', 'text-white');
+        input.type = 'text';
+        input.name = 'praise[]';
+        input.value = praiseInput.value + " ~ " + tonoInput.value;
+        input.onkeydown = handleEnterKey;
+        input.ondblclick = handleDoubleClick;
+
+        // Crear el botón para eliminar el tag
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('ml-2', 'text-emerald-700', 'text-sm', 'font-bold', 'cursor-pointer');
+        deleteButton.innerText = '×'; // El botón mostrará una "x"
+        deleteButton.onclick = function () {
+            // Elimina el contenedor (y por lo tanto el input y el botón)
+            container.removeChild(tagContainer);
+            const elementosAnidados = container.querySelectorAll('*')
+            if (elementosAnidados.length == 0) {
+                container.classList.remove('block')
+                container.classList.add('hidden')
+            }
+
+            // Retornar la cantidad de elementos
+
+        };
+
+        // Añadir input y botón al contenedor del tag
+        tagContainer.appendChild(input);
+        tagContainer.appendChild(deleteButton);
+
+        // Añadir el contenedor del tag al contenedor principal
+        container.appendChild(tagContainer);
+
+        praiseInput.value = ""
+
+    }
+
+
+
+
+    function addWorship() {
+        const container = document.getElementById('worship-container');
+        container.classList.remove('hidden');
+        container.classList.add('block');
+
+        // Crear un contenedor para el input y el botón
+        const tagContainer = document.createElement('div');
+        tagContainer.classList.add('flex', 'items-center', 'bg-emerald-900', 'rounded-md', 'shadow-md', 'my-5', 'px-3', 'py-1');
+
+        // Crear el input
+        const input = document.createElement('input');
+        input.classList.add('block', 'w-full', 'px-2', 'py-1', 'text-base', 'bg-emerald-900', 'text-neutral-300', 'rounded-md', 'focus:outline-dashed', 'focus:border-1', 'focus:border-white','text-white');
+        input.type = 'text';
+        input.name = 'worship[]';
+        input.value = worshipInput.value + " ~ " + tonoWInput.value;
+        input.onkeydown = handleEnterKey;
+        input.ondblclick = handleDoubleClick;
+
+        // Crear el botón para eliminar el tag
+        const deleteButton = document.createElement('button');
+        deleteButton.classList.add('ml-2', 'text-emerald-700', 'text-sm', 'font-bold', 'cursor-pointer');
+        deleteButton.innerText = '×'; // El botón mostrará una "x"
+        deleteButton.onclick = function () {
+            // Elimina el contenedor (y por lo tanto el input y el botón)
+            container.removeChild(tagContainer);
+            const elementosAnidados = container.querySelectorAll('*')
+            if (elementosAnidados.length == 0) {
+                container.classList.remove('block')
+                container.classList.add('hidden')
+            }
+
+            // Retornar la cantidad de elementos
+
+        };
+
+        // Añadir input y botón al contenedor del tag
+        tagContainer.appendChild(input);
+        tagContainer.appendChild(deleteButton);
+
+        // Añadir el contenedor del tag al contenedor principal
+        container.appendChild(tagContainer);
+
+        worshipInput.value = ""
+    }
+
+
+    function handleEnterKey(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            event.target.readOnly = true;
+        }
+    }
+
+    function handleDoubleClick(event) {
+        event.target.readOnly = false;
+    }
+
+
+
+    // Get the elements
+    let wednesdayRadio = document.getElementById('wendnesdayRadio');
+    let saturdayRadio = document.getElementById('saturdayRadio');
+    let dateInput = document.getElementById('dateInput');
+
+    function handleDateChange() {
+        if (dateInput.value) {
+            // Si el campo de fecha tiene un valor, deshabilitar los botones de opción
+            wednesdayRadio.disabled = true;
+            saturdayRadio.disabled = true;
+            wednesdayRadio.checked = false;
+            saturdayRadio.checked = false;
+
+        } else {
+            // Si el campo de fecha está vacío, habilitar los botones de opción
+            wednesdayRadio.disabled = false;
+            saturdayRadio.disabled = false;
+        }
+    }
+
+    // Función para manejar cambios en los botones de opción
+    function handleRadioChange() {
+        if (wednesdayRadio.checked || saturdayRadio.checked) {
+            // Si algún botón de opción está marcado, deshabilitar el campo de fecha
+            dateInput.disabled = false;
+        } else {
+            // Si ningún botón de opción está marcado, habilitar el campo de fecha
+            dateInput.disabled = false;
+        }
+    }
+
+    // Agregar evento de escucha al campo de fecha
+    dateInput.addEventListener('input', handleDateChange);
+
+    // Agregar eventos de escucha a los botones de opción
+    wednesdayRadio.addEventListener('change', handleRadioChange);
+    saturdayRadio.addEventListener('change', handleRadioChange);
+
+    // Realizar una comprobación inicial para establecer el estado correcto de los elementos
+    handleDateChange();
+    handleRadioChange();
+
+
+    // Variables de los elementos del formulario
+    let formMeetings = document.getElementById('formSongs');
+    let hourInput = document.getElementById('hour');
+    let descriptionInput = document.getElementById('description');
+
+    const containerPraise = document.getElementById('praise-container');
+    const containerWorship = document.getElementById('worship-container');
+
+
+    // Función para validar campos de texto como alabanzas, adoraciones y descripción
+    // Función para validar si el div 'worship-container' está vacío
+    function validateWorshipContainer(div, errorMessage) {
+        if (div.children.length === 0) {
+            div.classList.add('border-red-500', 'shadow-red-400');
+            alert(errorMessage);
+            return false;
+        } else {
+            div.classList.remove('border-red-500', 'shadow-red-400');
+            div.classList.add('border-green-500', 'shadow-green-300');
+            return true;
+        }
+    }
+
+  
+
+    //Textos de Modificados
+    let dateText = document.getElementById('dateText')
+    let hourText = document.getElementById('hourText')
+
+
+    // Función para validar el campo de fecha //
+    function validateDateInput(input, saturInput, wensInput) {
+        if (input.value.trim().length === 0 && saturInput.checked == false && wensInput.checked == false) {
+            dateText.classList.add('text-red-500');
+            return false;
+            
+        } else {
+            dateText.classList.remove('text-red-500');
+            dateText.classList.add('text-green-500');
+            return true;
+        }
+    }
+
+
+    function validateHourInput(input) {
+        if (input.value.trim().length === 0) {
+            input.classList.add('border-red-500', 'shadow-red-400');
+            hourText.classList.add('text-red-500');
+            return false;
+        } else {
+            input.classList.remove('border-red-500', 'shadow-red-400');
+            input.classList.add('border-green-500', 'shadow-green-300');
+            hourText.classList.remove('text-red-500');
+            hourText.classList.add('text-green-500');
+            return true;
+        }
+    }
+
+
+    // Función de validación del formulario
+    function validateForm(event) {
+        // Validar los campos
+        const isPraiseValid = validateWorshipContainer(containerPraise, 'Por favor, ingresa una alabanza.');
+        const isWorshipValid = validateWorshipContainer(containerWorship, 'Por favor, ingresa adoraciones.');
+        const isDateValid = validateDateInput(dateInput, saturdayRadio, wednesdayRadio);
+        const isHourValid = validateHourInput(hourInput);
+
+        // Si alguno de los campos no es válido, evita el envío del formulario
+        if (!isPraiseValid || !isWorshipValid || !isDateValid || !isHourValid) {
+            return false
+        } else {
+            return true
+        }
+    }
+
+    // Añadir el evento de submit al formulario
+
+
+</script>
+
+
+
+{%endblock%}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+
+
+
+{% block title %}
+Inicia sesión - MusicApp
+{% endblock %}
+
+{% block content %}
+
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div class="">
+  <div class="absolute items-center w-full px-5 py-8 mx-auto md:px-10 lg:px-24 max-w-7xl">
+    <div class="p-6 border-l-4 border-emerald-500 rounded-r-xl bg-emerald-50">
+      <div class="flex">
+        <div class="flex-shrink-0">
+          <svg class="w-5 h-5 text-emerald-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"
+            aria-hidden="true">
+            <path fill-rule="evenodd"
+              d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+              clip-rule="evenodd"></path>
+          </svg>
+        </div>
+        <div class="ml-3">
+          <div class="text-sm text-emerald-600">
+            <p>Atención: {{message}}.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+
+<section class="flex items-center justify-center h-screen">
+  <div class="flex min- overflow-hidden shadow-2xl p-5 rounded-xl bg-[#1f1d1d]">
+    <div class="flex flex-col justify-center flex-1 px-6 py-12 sm:px-6  max-[400px]:px-4 lg:flex-none lg:px-20 xl:px-14">
+      <div class="w-full max-w-xl mx-auto lg:w-96">
+        <div class="flex justify-between items-center mb-4">
+          <h2 class="text-2xl font-bold text-white">Inicia Sesión.</h2>
+          <a href="{{url_for('index')}}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+            </svg>
+            </a>
+            
+      </div>
+
+        <div class="mt-8">
+          <div class="mt-6">
+            <form method="POST" class="space-y-6">
+              <div>
+                <label for="email" class="block text-sm font-medium text-neutral-400"> Email:</label>
+                <div class="mt-1 ">
+                  <input id="email" name="email" type="email" autocomplete="email" required
+                    placeholder="tuemail@tuemail.com"
+                    class="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-stone-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-offset-2 focus:ring-offset-emerald-300">
+                </div>
+              </div>
+
+              <div class="space-y-1">
+                <label for="password" class="block text-sm font-medium text-neutral-400"> Contraseña: </label>
+                <div class="mt-1">
+                  <input id="password" name="password" type="password" autocomplete="current-password" required
+                    placeholder="Tu contraseña"
+                    class="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-600 bg-stone-50 focus:outline-none focus:border-transparent focus:ring-2  focus:ring-offset-2 focus:ring-offset-emerald-300">
+                </div>
+              </div>
+
+
+              <div>
+                <button type="submit"
+                  class="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-emerald-500 rounded-xl hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500">Iniciar
+                  sesión</button>
+              </div>
+
+              <div class="flex justify-center items-center mt-3">
+                <span class="text-neutral-500">¿No tienes cuenta? <a class="text-emerald-600 text-medium underline" href="{{ url_for('register')}}">Registrate</a></span>
+
+              </div>
+            </form>
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+{% endblock %}

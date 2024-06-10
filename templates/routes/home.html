@@ -1,0 +1,96 @@
+{% extends 'index.html'%}
+
+
+
+{%block body%}
+{% if not session_user %}
+<section class="mt-24 relative">
+  <div class="absolute inset-0 z-[1]">
+    <img class="h-full w-full object-cover object-center opacity-[0.090] " src="/static/guitarra.jpg" alt="">
+  </div>
+
+  <div class="max-w-[50rem] mx-auto h-full relative z-[2] px-6 md:px-8 lg:px-10 ">
+    <div class=" w-full  flex flex-col relative space-y-6 flex">
+      <div class="mt-auto mb-0 text-gray-50 md:pb-36 space-y-6">
+        <span class="font-light text-lg text-accent-500 ">Bienvenido a MusicApp.</span>
+        <h1 class="text-3xl text-emerald-400 md:text-5xl max-w-[30rem] font-bold ">La app que organiza tu banda.</h1>
+        <span class="font-light text-sm text-accent-500 ">Logueate y comienza a gestionar tus días de ensayo, eventos
+          importantes y más...</span>
+
+        <div class="md:flex-row flex-col flex gap-5">
+          <button
+            class="inline-block text-base font-medium px-12 underline py-2 bg-accent-400 rounded-lg cursor-pointer"><a href="{{url_for('login')}}">Inicia
+              Sesión</a></button>
+          <button
+            class="inline-block text-base font-medium px-12 py-2 border border-emerald-400 rounded-lg text-emerald-400 cursor-pointer bg-gray-50/10 backdrop-blur-1xl"><a href="{{url_for('register')}}">Registrate!</a></button>
+        </div>
+
+
+        
+
+
+      </div>
+
+      <div class="w-full h-[90px] max-[400px]:h-[130px] ">
+        
+      </div>
+      <div class="flex flex-col gap-3 items-center -mt-20">
+        <img src="/static/creator.jpg" alt=""
+          class="w-40 h-40 object-cover border-2 border-emerald-400 rounded-full">
+        <div class="flex items-center space-x-2 mt-2">
+          <p class="text-2xl text-white"></p>
+          
+        </div>
+        <p class="text-sm text-white text-center">By <span class="text-emerald-400">Jeremías Olivera</span> estudiante de la carrera <span class="underline">Análista de sistemas</span>.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <br><br><br><br><br><br><br><br><br><br>
+</section>
+{%else%}
+<section class="mt-24 relative">
+  <div class="absolute inset-0 z-[1]">
+    <img class="h-full w-full object-cover object-center opacity-[0.090] " src="/static/guitarra.jpg" alt="">
+  </div>
+
+  <div class="max-w-[50rem] mx-auto h-full relative z-[2] px-6 md:px-8 lg:px-10 ">
+    <div class=" w-full  flex flex-col relative space-y-6 flex">
+      <div class="mt-auto mb-0 text-gray-50 md:pb-36 space-y-6">
+        <span class="font-light text-lg text-accent-500 ">Bienvenido a MusicApp.</span>
+        <h1 class="text-3xl text-emerald-400 md:text-5xl max-w-[30rem] font-bold ">La app que organiza tu banda.</h1>
+        <span class="font-light text-sm text-accent-500 ">Añade eventos, conoce a otros músicos y aprende.</span>
+
+        <div class="md:flex-row flex-col flex gap-5">
+          <button
+            class="inline-block text-base font-medium px-12 py-2 border border-emerald-400 rounded-lg text-emerald-400 cursor-pointer bg-gray-50/10 backdrop-blur-1xl"><a href="{{url_for('perfil')}}">Comenzemos!</a></button>
+        </div>
+
+
+        
+
+
+      </div>
+
+      <div class="w-full h-[60px] max-[400px]:h-[100px] ">
+        
+      </div>
+      <div class="flex flex-col gap-3 items-center -mt-20">
+        <img src="/static/creator.jpg" alt=""
+          class="w-40 h-40 object-cover border-2 border-emerald-400 rounded-full">
+        <div class="flex items-center space-x-2 mt-2">
+          <p class="text-2xl text-white"></p>
+          
+        </div>
+        <p class="text-sm text-white text-center">By <span class="text-emerald-400">Jeremías Olivera</span> estudiante de la carrera Análisis en sistemas.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <br><br><br><br><br><br><br><br><br><br>
+</section>
+{%endif%}
+
+{%endblock%}

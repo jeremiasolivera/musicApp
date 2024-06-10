@@ -1,0 +1,84 @@
+
+{
+
+    "news": [
+        {
+            "id": 1,
+            "titulo": "¿Cómo hacer segundas voces?",
+            "descripcion": "Técnicas para aprender segundas voces, métodos de ensayo y puntos importantes.",
+            "id_video": "HrhNt0CrlYI",
+            "categoria": "canto"
+        }, {
+            "id": 2,
+            "titulo": "¿Cómo encontrar mi voz verdadera para cantar?",
+            "descripcion": "Un punto clave para sonar más natural y no esforzar nuestras cuerdas vocales.",
+            "id_video": "WBkj0ZNSkVQ",
+            "categoria": "canto"
+        },
+        {
+            "id": 3,
+            "titulo": "Voces 'Grande y Fuerte - Miel San Marcos' ",
+            "descripcion": "Mejora tu coro implementando estás voces demostradas por Tatiana Rodriguez.",
+            "id_video": "pZPlQnbx20Y",
+            "categoria": "canto"
+        },
+        {
+            "id": 4,
+            "titulo": "Ejercicios de calentamiento",
+            "descripcion": "Limpia y prepara tu voz antes de un culto.",
+            "id_video": "vrBeeRC1QIQ",
+            "categoria": "canto"
+        },
+        {
+            "id": 5,
+            "titulo": "¿Cómo cantar fuerte sin esforzar la garganta?",
+            "descripcion": "Aumenta el volumen de tu voz sin esforzarla y sin gritar.",
+            "id_video": "YHOF968z_-k",
+            "categoria": "canto"
+        },
+        {
+            "id": 6,
+            "titulo": "Yeshua Hamashiaj - Cover Batería Montesanto",
+            "descripcion": "Drum cam de Agustín Vielman cover Batería.",
+            "id_video": "Z2A331W-0iw",
+            "categoria": "musico"
+        },
+        {
+            "id": 7,
+            "titulo": "Prophesy PlanetShakers cover bajo",
+            "descripcion": "Cover bajo por Segi Julle.",
+            "id_video": "NgGsl9JTQgU",
+            "categoria": "musico"
+        },
+        {
+            "id": 8,
+            "titulo": "Por La Fe - Un Corazón Ft. Barak",
+            "descripcion": "Por La Fe - Nueva canción de dos grandes bandas del momento para disfruta.",
+            "id_video": "uUuLCwFFiAk",
+            "categoria": "todo"
+        },
+        {
+            "id": 9,
+            "titulo": "Yeshua Hamashiaj - Cover guitarra. Montesanto",
+            "descripcion": "Cover por Douglas D'Lima guitarrista y productor de Montesanto.",
+            "id_video": "BOjpwCOUmQo",
+            "categoria": "musico"
+        },
+        {
+            "id": 10,
+            "titulo": "Mesías - Averly Morillo",
+            "descripcion": "Mesías - Nueva canción para disfrutarla y aprenderla en la semana.",
+            "id_video": "7b9z-YcDUrc",
+            "categoria": "todo"
+        }
+
+
+        
+
+        
+    ]
+
+
+
+
+}

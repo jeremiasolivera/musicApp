@@ -1,0 +1,373 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Registrate - MusicApp
+{% endblock %}
+
+{% block content %}
+
+{% for category, message in get_flashed_messages(with_categories=True) %}
+<div>
+    <div class="absolute items-center w-full px-5 py-8 mx-auto md:px-10 lg:px-24 max-w-7xl">
+      <div class="p-6 border-l-4 border-emerald-500 rounded-r-xl bg-emerald-50">
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <svg class="w-5 h-5 text-emerald-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+          </div>
+          <div class="ml-3">
+            <div class="text-sm text-emerald-600">
+              <p>Atención: {{message}}.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endfor %}
+
+
+
+<section class="block sm:hidden max-[400px]:my-40 my-10  flex items-center justify-center h-screen ">
+    <div class="flex min- overflow-hidden shadow-2xl p-5 rounded-xl bg-[#1f1d1d]">
+        <div class="flex flex-col justify-center flex-1 px-4 py-10">
+            <div class="">
+              <div class="flex justify-between items-center mb-4">
+                <h2 class="text-2xl font-bold text-white">Registrate.</h2>
+                <a href="{{url_for('index')}}"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-red-500">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15M12 9l-3 3m0 0 3 3m-3-3h12.75" />
+                  </svg>
+                  </a>
+                  
+            </div>
+
+                <div class="mt-8">
+                    <div class="mt-6">
+                        <form method="POST" action="{{url_for('register')}}" class="space-y-6" enctype="multipart/form-data" id="formRegister">
+                            <div>
+                                <label for="name" class="block text-sm max-[400px]:text-base  font-medium text-neutral-400"> Nombre:</label>
+                                <div class="mt-1" >
+                                    <input id="name" name="name" type="text" required placeholder="Tu nombre" class="min-[320px]:px-3 min-[320px]:py-2 block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg  bg-stone-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300">
+                                </div>
+                            </div>
+
+                            <div class="space-y-1">
+                                <label for="email" class="block max-[400px]:text-base text-sm font-medium text-neutral-400"> Email: </label>
+                                <div class="mt-1">
+                                    <input id="email" name="email" type="email" required placeholder="prueba@prueba.com" class="min-[320px]:px-3 min-[320px]:py-2 block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg  bg-stone-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300">
+                                </div>
+                            </div>
+
+                            <div class="space-y-1">
+                                <label for="password" class="block  max-[400px]:text-base text-sm font-medium text-neutral-400"> Contraseña: </label>
+                                <div class="mt-1">
+                                    <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Tu contraseña" class="min-[320px]:px-3 min-[320px]:py-2 block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg  bg-stone-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300">
+                                </div>
+                              </div>
+                              <span  id="passwordLength"></span>
+
+                            <div class="space-y-1">
+                              <label for="passwordRepeat" class="block  max-[400px]:text-base text-sm font-medium text-neutral-400">Repetir Contraseña: </label>
+                              <div class="mt-1">
+                                  <input id="passwordRepeat" name="password" type="password" autocomplete="current-password" required placeholder="Tu contraseña" class="min-[320px]:px-3 min-[320px]:py-2 block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg  bg-stone-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300">
+                              </div>
+                            </div>
+                            <span  id="passwordError"></span>
+
+                            <div class="space-y-1">
+                                <label for="photo_url" class="block text-sm max-[400px]:text-base font-medium  text-neutral-400">Foto de perfil: *</label>
+                                <div class="mt-1">
+                                    <!-- Input de tipo file oculto -->
+                                    <input id="photo_url" name="photo_url" type="file" class="opacity-0 absolute w-0 h-0">
+                            
+                                    <!-- Botón estilizado -->
+                                    <button type="button"  onclick="document.getElementById('photo_url').click()" class="bg-emerald-400 w-full hover:bg-emerald-400 text-white font-bold py-2 px-4 rounded">
+                                        Cargar Foto
+                                    </button>
+                                </div>
+                            </div>
+                            
+
+                           
+
+                            
+                            <div class="space-y-1">
+                                <label for="rol" class="block text-sm max-[400px]:text-base font-medium text-neutral-400"> Rol: </label>
+                                <div class="mt-1">
+                                    <select name="rol" id="rol" required class="block w-full p-2 rounded-md pl-2 focus:ring focus:ring-emerald-300">
+                                        <option selected value="0">Músico</option>
+                                        <option value="1">Cantante</option>
+                                    </select>
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <button type="submit" class="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-emerald-600 rounded-xl hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500">Registrarse</button>
+                            </div>
+
+
+                            <div class="flex justify-center items-center mt-3">
+                                <span class="text-neutral-400">¿Ya tienes una cuenta? <a class="text-emerald-600 text-medium underline" href="{{ url_for('login')}}">Inicia sesión</a></span>
+                
+                              </div>
+                        </form>
+                       
+                 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="flex justify-center items-center hidden sm:block">
+    <div class="px-2 py-8 mx-auto max-w-7xl">
+      <div class="justify-center mx-auto text-left align-bottom transition-all transform bg-white rounded-lg">
+        <div class="grid flex-wrap items-center justify-center grid-cols-1 mx-auto shadow-xl lg:grid-cols-2 rounded-xl">
+          <div class="w-full px-6 py-3">
+            <div>
+              <div class="mt-3 text-left sm:mt-5">
+                <div class="inline-flex flex-col gap-3 w-full">
+                    <a class="text-emerald-600 max-[400px]:text-md text-medium" href="{{url_for('register')}}">Music App</a>
+
+                  <h3 class="text-lg font-bold text-neutral-400 l eading-6 lg:text-3xl">Registrate</h3>
+                </div>
+               
+              </div>
+            </div>
+  
+            <form method="POST" action="{{url_for('register')}}" class="space-y-6" enctype="multipart/form-data" >
+              <div>
+                <label for="email" class="">Email</label>
+                <input type="text" name="email" id="email" class="block w-full px-5 py-3 text-base text-neutral-400 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" placeholder="Enter your email">
+              </div>
+              <div>
+                <label for="password" class="">Contraseña</label>
+                <input type="text" name="password" id="password" class="block w-full px-5 py-3 text-base text-neutral-400 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" placeholder="Enter your password">
+              </div>
+              <div>
+                <label for="password" class="">Repetir contraseña</label>
+                <input type="text" name="password" id="password" class="block w-full px-5 py-3 text-base text-neutral-400 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" placeholder="Enter your password">
+              </div>
+              <div>
+                <label for="password" class="">Nombre</label>
+                <input type="text" name="name" id="password" class="block w-full px-5 py-3 text-base text-neutral-400 placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg bg-gray-50 focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300" placeholder="Enter your password">
+              </div>
+              <div class="space-y-1">
+                <label for="photo_url" class="block text-sm max-[400px]:text-base font-medium  text-neutral-400">Foto de perfil:</label>
+                <div class="mt-1">
+                    <!-- Input de tipo file oculto -->
+                    <input id="photo_url" name="photo_url" type="file" class="opacity-0 absolute w-0 h-0" required>
+            
+                    <!-- Botón estilizado -->
+                    <button type="button"  onclick="document.getElementById('photo_url').click()" class="bg-emerald-400 w-full hover:bg-emerald-400 text-white font-bold py-2 px-4 rounded">
+                        Cargar Foto
+                    </button>
+                </div>
+            </form>
+            
+
+           
+
+            
+            <div class="space-y-1">
+                <label for="rol" class="block text-sm max-[400px]:text-base font-medium text-neutral-400"> Rol: </label>
+                <div class="mt-1">
+                    <select name="rol" id="rol" class="block w-full p-2 rounded-md pl-2 focus:ring focus:ring-emerald-300">
+                        <option selected value="0">Músico</option>
+                        <option value="1">Cantante</option>
+                    </select>
+                </div>
+            </div>
+              <div class="flex flex-col mt-4 lg:space-y-5">
+                <button type="button" class="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-emerald-600 rounded-xl hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500">Registrate</button>
+                <a href="#" type="button" class="inline-flex justify-center py-4 text-base font-medium text-gray-500 focus:outline-none hover:text-neutral-400 focus:text-emerald-600 sm:text-sm"> Forgot your Password? </a>
+              </div>
+            </div>
+          </div>
+          <div class="order-first hidden w-full h-full lg:block">
+            <img class="object-cover h-full bg-cover rounded-l-lg" src="https://images.unsplash.com/photo-1491933382434-500287f9b54b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+
+<!--
+
+
+<form method="POST" class="space-y-6 px-10" enctype="multipart/form-data">
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-neutral-400"> Nombre:</label>
+                                <div class="mt-1 " >
+                                    <input id="name" name="name" type="text" autocomplete="name" required placeholder="Tu nombre" class="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-400 bg-white focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="name" class="block text-sm font-medium text-neutral-400"> Email:</label>
+                                <div class="mt-1 " >
+                                    <input id="name" name="email" type="email" autocomplete="email" required placeholder="tuemail@tuemail.com" class="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-400 bg-white focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300">
+                                </div>
+                            </div>
+
+                            <div class="space-y-1">
+                                <label for="password" class="block text-sm font-medium text-neutral-400"> Contraseña: </label>
+                                <div class="mt-1">
+                                    <input id="password" name="password" type="password" autocomplete="current-password" required placeholder="Tu contraseña" class="block w-full px-5 py-3 text-base placeholder-gray-300 transition duration-500 ease-in-out transform border border-transparent rounded-lg text-neutral-400 bg-white focus:outline-none focus:border-transparent focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-300">
+                                </div>
+                            </div>
+
+                            <div class="space-y-1">
+                                <label for="photo_url" class="block text-sm font-medium text-neutral-400"> Foto de perfil: </label>
+                                <div class="mt-1">
+                                    <input id="photo_url" name="photo_url" type="file" class="block w-full text-sm text-gray-700 bg-white border border-gray-100 rounded-md shadow-sm cursor-pointer focus:outline-none focus:ring focus:ring-emerald-50 focus:border-emerald-300 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border file:border-gray-300 file:text-sm file:font-medium file:text-gray-700 file:bg-gray-100 file:hover:bg-gray-200" required>
+                                </div>
+                            </div>
+
+                            
+                            <div class="space-y-1">
+                                <label for="rol" class="block text-sm font-medium text-neutral-400"> Rol: </label>
+                                <div class="mt-1">
+                                    <select name="rol" id="rol" class="block w-full p-2 rounded-md pl-2 focus:ring focus:ring-emerald-300">
+                                        <option selected value="0">Músico</option>
+                                        <option value="1">Cantante</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <button type="submit" class="flex items-center justify-center w-full px-10 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform bg-emerald-600 rounded-xl hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500">Registrate</button>
+                            </div>
+                        </form>
+                       
+-->
+
+
+{% endblock %}
+
+
+ 
+{%block js%}
+
+<script>
+    let formRegister = document.getElementById('formRegister')
+    let nameInput = document.getElementById('name');
+    let emailInput = document.getElementById('email');
+    let passwordInput = document.getElementById('password');
+    let passwordRepeatInput = document.getElementById('passwordRepeat');
+    let passwordErrorText = document.getElementById('passwordError');
+    let passwordLengthText = document.getElementById('passwordLength');
+
+    nameInput.addEventListener("blur", (e) => validInputForm(e))
+    emailInput.addEventListener("blur", (e) => validInputForm(e))
+    passwordInput.addEventListener("blur",(e) => validInputPasswordForm(e))
+    passwordRepeatInput.addEventListener("blur",(e) => validInputPasswordRepeatForm(e))
+
+
+    function validInputForm(e){
+      const fieldName = e.target;
+      const fieldValueName = e.target.value;
+      if(fieldValueName.trim().length === 0){
+        fieldName.classList.add("border-red-500")
+        fieldName.classList.add("shadow-md")
+        fieldName.classList.add("shadow-red-400")
+      }else{
+        fieldName.classList.remove("border-red-500")
+        fieldName.classList.remove("shadow-md")
+        fieldName.classList.remove("shadow-red-400")
+        fieldName.classList.add("shadow-md")
+        fieldName.classList.add("shadow-green-300")
+        fieldName.classList.add("border-green-500")
+        fieldName.classList.add("border-2")
+      }
+    }
+
+    function validInputPasswordForm(e){
+      const fieldName = e.target;
+      const fieldValueName = e.target.value;
+      if(fieldValueName.trim().length < 6){
+        fieldName.classList.add("border-red-500")
+        fieldName.classList.add("shadow-md")
+        fieldName.classList.add("shadow-red-400")
+        passwordLengthText.textContent = 'La contraseña es muy débil';
+        passwordLengthText.classList.add('text-red-400');
+        passwordLengthText.classList.add('pt-5');
+      }else{
+        fieldName.classList.remove("border-red-500")
+        fieldName.classList.remove("shadow-md")
+        fieldName.classList.remove("shadow-red-400")
+        passwordLengthText.textContent = '';
+
+        fieldName.classList.add("shadow-md")
+        fieldName.classList.add("shadow-green-300")
+        fieldName.classList.add("border-green-500")
+        fieldName.classList.add("border-2")
+      }
+    }
+
+
+    function validInputPasswordRepeatForm(e) {
+      const passwordField = passwordInput;
+      const repeatPasswordField = passwordRepeatInput;
+  
+      // Compara los valores de los campos de contraseña y repetición de contraseña
+      if (repeatPasswordField.value !== passwordField.value || repeatPasswordField.value.trim().length === 0) {
+          // Si no coinciden, agrega estilos de borde amarillo
+          repeatPasswordField.classList.add('border-yellow-500');
+          repeatPasswordField.classList.add('shadow-md');
+          repeatPasswordField.classList.add('shadow-yellow-400');
+
+          passwordErrorText.textContent = 'Las contraseñas no coinciden';
+          passwordErrorText.classList.add('text-red-400');
+          passwordErrorText.classList.add('pt-5');
+  
+          // Elimina estilos previos si están presentes
+          repeatPasswordField.classList.remove('border-green-500');
+          repeatPasswordField.classList.remove('shadow-green-300');
+      } else {
+          // Si coinciden, elimina estilos de borde amarillo y agrega estilos verdes
+          repeatPasswordField.classList.remove('border-yellow-500');
+          repeatPasswordField.classList.remove('shadow-md');
+          repeatPasswordField.classList.remove('shadow-yellow-400');
+
+          passwordErrorText.textContent = '';
+          // Agrega estilos verdes
+          repeatPasswordField.classList.add("shadow-md")
+          repeatPasswordField.classList.add("shadow-green-300")
+          repeatPasswordField.classList.add("border-green-500")
+          repeatPasswordField.classList.add("border-2")
+      }
+  }
+  
+
+
+// Función de validación del formulario
+function validateForm(event) {
+  // Validar los campos
+  validInputForm({ target: nameInput });
+  validInputForm({ target: emailInput });
+  validInputPasswordForm({ target: passwordInput });
+  validInputPasswordRepeatForm({ target: passwordRepeatInput });
+  
+  // Comprobar si alguno de los campos tiene un error
+  if (
+      nameInput.classList.contains('border-red-500') ||
+      emailInput.classList.contains('border-red-500') ||
+      passwordInput.classList.contains('border-red-500') ||
+      passwordRepeatInput.classList.contains('border-yellow-500')
+  ) {
+      // Si hay errores, evitar el envío del formulario
+      event.preventDefault();
+  }
+}
+
+// Agregar evento de submit al formulario
+formRegister.addEventListener('submit', validateForm);
+</script>
+
+
+{%endblock%}

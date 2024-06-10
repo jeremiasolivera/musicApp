@@ -28,7 +28,7 @@
             <p class="text-sm text-gray-500">{{user_profile.perfil.get('email')}}</p>
         </div>
         
-        <div class="flex-1 flex flex-col items-center lg:items-end justify-end px-8 mt-2">
+        <div class="flex-1 flex flex-col items-center justify-end px-8 mt-2">
             <div class="flex items-center space-x-4 mt-2 ">
                 <span
                     class="flex items-center bg-emerald-500 hover:bg-emerald-500 text-gray-100 px-4 py-2 rounded text-sm space-x-2 transition duration-100">
@@ -57,7 +57,7 @@
     </div>
     <br><br><br>
     <div class="bg-stone-900 p-6 rounded-md" >
-        <h1 class="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:text-6xl lg:max-w-7xl mb-8">
+        <h1 class="max-w-5xl text-2xl font-bold leading-none tracking-tighter text-neutral-600 mb-8">
   
             Mis Reuniones.
         </h1>
@@ -85,18 +85,7 @@
                     </div>
                 </div>
                 <div class="w-full h-px bg-emerald-400"></div>
-                <div class="pl-5 pr-5 pt-5">
-                    <h2 class="text-xl text-slate-400 font-bold">
-                        Director/a:
-                    </h2>
-                    <span class="text-xl text-slate-700 font-bold">
-                        <a href="/perfil/{{meet.get('leader_mail')}}">
-        
-                            {{meet.get('leader')}}
-                        </a>
-        
-                    </span>
-                </div>
+               
                 <div class="pl-5 pr-5 pt-5">
                     <h2 class="text-xl text-slate-400 font-bold mb-2">
                         Alabanzas:
